@@ -52,8 +52,8 @@ library(icons) #https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free
 
 - Introduction to *dplyr*
 
- 
- 
+<br />
+<br />
  
 .content-box-blue[
 `r icons::fontawesome("github")` Follow along from the [Github repo](https://github.com/psych-259-data-science-2022/259-langbasics-importing)
@@ -124,7 +124,7 @@ paste0("data_raw/",x)
 
 - `is.na()` checks whether a value is missing
 
-- not to be confused with `NULL` (does not exist), or `NaN` (not a number) 
+- not to be confused with `NULL` (empty), or `NaN` (not a number) 
 
 ---
 `r chunk_reveal("missing", break_type = "auto", widths = c(2, 1))`
@@ -135,9 +135,42 @@ print(x)
 is.na(x)
 mean(x)
 mean(x, na.rm = TRUE)
+
+x <- c(1, 2, 3, NULL)
+x
+
 ```
 
+# Logical comparisons 
 
+- Comparisons between values that result in a logical output (TRUE/FALSE)
+
+- Greater than/less than (>, >=, <, <=)
+
+- Equals (==)
+
+- Not equals (==)
+
+- Not (!)
+
+- And (&)
+
+- Or (|)
+
+---
+`r chunk_reveal("logical", break_type = "auto", widths = c(2, 1))`
+
+```{r logical, include = FALSE}
+x <- 1
+x > 0
+x > 2
+x == 1
+x != 2
+!(x == x)
+"s" == "S"
+1 > 0 | 0 > 1
+1 > 0 & 0 > 1
+```
 
 <!-- adjust font size in this css code chunk -->
 ```{css, eval = TRUE, echo = FALSE}
