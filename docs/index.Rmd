@@ -35,18 +35,14 @@ style_mono_accent(
 ```
 
 ```{r, include = F}
-# This is the recommended set up for flipbooks
-# you might think about setting cache to TRUE as you gain practice --- building flipbooks from scratch can be time consuming
 knitr::opts_chunk$set(fig.width = 6, message = FALSE, warning = FALSE, comment = "", cache = F)
 library(flipbookr)
 library(tidyverse)
-#devtools::install_github("gadenbuie/xaringanExtra")
-#remotes::install_github("mitchelloharawild/icons")
 library(icons) #https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free
 ```
-
 # How can R data processing help us minimize mistakes?
 
+.center[<img src="types-of-errors.png" width="700">]
 ---
 # Data type and transformation tutorial
 
@@ -55,6 +51,9 @@ library(icons) #https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free
 - Logical statements
 
 - Introduction to *dplyr*
+
+ 
+ 
  
 .content-box-blue[
 `r icons::fontawesome("github")` Follow along from the [Github repo](https://github.com/psych-259-data-science-2022/259-langbasics-importing)
@@ -62,9 +61,85 @@ library(icons) #https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free
 
 .footnote[.small[.bold[Last updated: `r Sys.Date()`]]]
 
+---
+# Data types
+- Why have pre-defined types?
+  * Allows software to efficiently store data in memory
+  * If a value is an integer (1, 2, 3, 4) storing it as an integer makes calculations easier compared to storing it as a double (2.34542480424624086)
+  
+- Allows software to implement rules about transformations
+  * Addition/subtraction for a date follows different rules compared with integers/double
+  * “Less than” makes sense when comparing numbers, but not when comparing strings
 
-<!-- adjust font size in this css code chunk, currently 80 -->
+---
+# Common data types in R
+- Numeric
+  * integer: 1, 2, 3
+  * double: 1.12124
+  
+- Character: “hello”
 
+- Logical: T/F (TRUE/FALSE)
+
+- Datetime
+
+- Factor
+
+- Use `typeof()` function to check type of a value, `str()` to check the types of each column of a tibble
+
+---
+# Functions to test and convert types
+
+- Take a value and convert it into a different type
+  * `as.numeric()`, `as.character()`, `as.date()`
+
+- Check if something is a particular type
+  * `is.numeric()`, `is.character()`
+
+---
+`r chunk_reveal("types", break_type = "auto", widths = c(2, 1))`
+
+```{r types, include = FALSE}
+x <- 1
+x
+typeof(x)
+is.numeric(x)
+is.character(x)
+as.character(x)
+x + 1
+
+x <- "data.csv"
+typeof(x)
+is.numeric(x)
+is.character(x)
+as.numeric(x)
+#"data_raw" + x
+paste0("data_raw/",x)
+```
+
+---
+# Missing values
+
+- `NA` means missing data in R
+
+- `is.na()` checks whether a value is missing
+
+- not to be confused with `NULL` (does not exist), or `NaN` (not a number) 
+
+---
+`r chunk_reveal("missing", break_type = "auto", widths = c(2, 1))`
+
+```{r missing, include = FALSE}
+x <-  c(1, 2, 3, NA)
+print(x)
+is.na(x)
+mean(x)
+mean(x, na.rm = TRUE)
+```
+
+
+
+<!-- adjust font size in this css code chunk -->
 ```{css, eval = TRUE, echo = FALSE}
 .remark-code{line-height: 1.5; font-size: 70%}
 
