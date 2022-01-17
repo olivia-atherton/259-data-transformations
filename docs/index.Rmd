@@ -97,7 +97,7 @@ library(icons) #https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free
 
 - Factor
 
-- Use `typeof()` function to check type of a value, `str()` to check the types of each column of a tibble
+- Use `typeof()` function to check type of a value, `str()` or `glimpse()` to check the types of each column of a tibble
 
 ---
 # Functions to test and convert types
@@ -150,7 +150,6 @@ mean(x, na.rm = TRUE)
 
 x <- c(1, 2, 3, NULL)
 x
-
 ```
 ---
 # Logical comparisons 
@@ -205,6 +204,60 @@ x <- c(0, 1, 2, 3)
 ifelse(NA %in% x, "x contains a missing value", "x does not contain a missing value")
 ```
 
+---
+# Data transformation with the dplyr package
+
+- A toolbox for common data processing/manipulation operations to apply to tibbles
+  * `glimpse()` to see the structure of a tibble
+  * `arrange()` to sort data by columns
+  * `filter()` and `slice()` to subset data by rows
+  * `select()` to subset data by columns
+  * `rename()` to rename columns
+  * `relocate()` to move columns
+  * `mutate()` to add or change columns (or their values)
+  * `summarize()` to calculate summary statistics over rows of data
+  * `group_by()` to perform operations within subsets of data
+  * and many more...
+
+---
+`r chunk_reveal("arrange", break_type = "rotate", float = "none", widths = c(5, 1))`
+
+```{r arrange, include = FALSE}
+library(tidyverse) #loads dplyr
+ds <- starwars #loads built-in star wars database
+glimpse(ds) #ROTATE
+arrange(ds, name) #ROTATE
+arrange(ds, height) #ROTATE
+arrange(ds, -height, mass) #ROTATE
+arrange(ds, eye_color, hair_color) #ROTATE
+```
+
+---
+`r chunk_reveal("filter", break_type = "rotate", float = "none", widths = c(5, 1))`
+
+```{r filter, include = FALSE}
+filter(ds, height < 100) #ROTATE
+filter(ds, name == "Yoda") #ROTATE
+filter(ds, is.na(hair_color)) #ROTATE
+filter(ds, height > 100, height < 150) #ROTATE
+filter(ds, eye_color %in% c("blue","brown")) #ROTATE
+filter(ds, !(eye_color %in% c("blue","brown"))) #ROTATE
+```
+
+---
+`r chunk_reveal("select", break_type = "rotate", float = "none", widths = c(5, 1))`
+
+```{r select, include = FALSE}
+select(ds, name) #ROTATE
+select(ds, name, height, mass) #ROTATE
+select(ds, c("name", "height", "mass")) #ROTATE
+select(ds, name:eye_color) #ROTATE
+select(ds, -(eye_color:starships)) #ROTATE
+select(ds, ends_with("color")) #ROTATE
+select(ds, contains("_")) #ROTATE
+select(ds, is.numeric) #ROTATE
+select(ds, is.character) #ROTATE
+```
 
 <!-- adjust font size in this css code chunk -->
 ```{css, eval = TRUE, echo = FALSE}
