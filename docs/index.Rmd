@@ -43,6 +43,18 @@ library(icons) #https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free
 # How can R data processing help us minimize mistakes?
 
 .center[<img src="types-of-errors.png" width="700">]
+
+---
+# How can R data processing help us minimize mistakes?
+- Code *is* documentation
+- Code can automate data transfer/data processing without human input
+
+- But coding errors are also common...what can we do to make sure that our code works?
+  * Instead of “hard” coding based on position (such as ds[1, 2]), filter and select by name and logical conditions
+  * Use good coding practices to clean up variable names to make them human-readable
+  * Reduce code duplication (copy-paste-tweak) with loops and functions
+  * Write code that's reproducible (avoiding absolute file paths)
+
 ---
 # Data type and transformation tutorial
 
@@ -140,7 +152,7 @@ x <- c(1, 2, 3, NULL)
 x
 
 ```
-
+---
 # Logical comparisons 
 
 - Comparisons between values that result in a logical output (TRUE/FALSE)
@@ -149,7 +161,7 @@ x
 
 - Equals (==)
 
-- Not equals (==)
+- Not equals (!=)
 
 - Not (!)
 
@@ -170,7 +182,29 @@ x != 2
 "s" == "S"
 1 > 0 | 0 > 1
 1 > 0 & 0 > 1
+
+# Element-wise logical statements
+x <- c(-1, 0, 1)
+x < 0
+x == 0
+1 %in% x
 ```
+
+---
+# How do we use logical statements?
+
+- One common way is through the `ifelse()` command?
+
+- `ifelse(LOGICAL STATEMENT, DO IF TRUE, DO IF FALSE)`
+
+```{r}
+x <- c(0, 1, 2, 3, NA)
+ifelse(NA %in% x, "x contains a missing value", "x does not contain a missing value")
+
+x <- c(0, 1, 2, 3)
+ifelse(NA %in% x, "x contains a missing value", "x does not contain a missing value")
+```
+
 
 <!-- adjust font size in this css code chunk -->
 ```{css, eval = TRUE, echo = FALSE}

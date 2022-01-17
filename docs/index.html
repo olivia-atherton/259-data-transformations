@@ -1017,7 +1017,7 @@ x
 
 
 
-
+---
 # Logical comparisons 
 
 - Comparisons between values that result in a logical output (TRUE/FALSE)
@@ -1026,7 +1026,7 @@ x
 
 - Equals (==)
 
-- Not equals (==)
+- Not equals (!=)
 
 - Not (!)
 
@@ -1341,6 +1341,264 @@ x != 2
 ```
 ]
 
+---
+count: false
+ 
+
+.panel1-logical-auto[
+
+```r
+x &lt;- 1
+x &gt; 0
+x &gt; 2
+x == 1
+x != 2
+!(x == x)
+"s" == "S"
+1 &gt; 0 | 0 &gt; 1
+1 &gt; 0 &amp; 0 &gt; 1
+
+# Element-wise logical statements
+*x &lt;- c(-1, 0, 1)
+```
+]
+ 
+.panel2-logical-auto[
+
+```
+[1] TRUE
+```
+
+```
+[1] FALSE
+```
+
+```
+[1] TRUE
+```
+
+```
+[1] TRUE
+```
+
+```
+[1] FALSE
+```
+
+```
+[1] FALSE
+```
+
+```
+[1] TRUE
+```
+
+```
+[1] FALSE
+```
+]
+
+---
+count: false
+ 
+
+.panel1-logical-auto[
+
+```r
+x &lt;- 1
+x &gt; 0
+x &gt; 2
+x == 1
+x != 2
+!(x == x)
+"s" == "S"
+1 &gt; 0 | 0 &gt; 1
+1 &gt; 0 &amp; 0 &gt; 1
+
+# Element-wise logical statements
+x &lt;- c(-1, 0, 1)
+*x &lt; 0
+```
+]
+ 
+.panel2-logical-auto[
+
+```
+[1] TRUE
+```
+
+```
+[1] FALSE
+```
+
+```
+[1] TRUE
+```
+
+```
+[1] TRUE
+```
+
+```
+[1] FALSE
+```
+
+```
+[1] FALSE
+```
+
+```
+[1] TRUE
+```
+
+```
+[1] FALSE
+```
+
+```
+[1]  TRUE FALSE FALSE
+```
+]
+
+---
+count: false
+ 
+
+.panel1-logical-auto[
+
+```r
+x &lt;- 1
+x &gt; 0
+x &gt; 2
+x == 1
+x != 2
+!(x == x)
+"s" == "S"
+1 &gt; 0 | 0 &gt; 1
+1 &gt; 0 &amp; 0 &gt; 1
+
+# Element-wise logical statements
+x &lt;- c(-1, 0, 1)
+x &lt; 0
+*x == 0
+```
+]
+ 
+.panel2-logical-auto[
+
+```
+[1] TRUE
+```
+
+```
+[1] FALSE
+```
+
+```
+[1] TRUE
+```
+
+```
+[1] TRUE
+```
+
+```
+[1] FALSE
+```
+
+```
+[1] FALSE
+```
+
+```
+[1] TRUE
+```
+
+```
+[1] FALSE
+```
+
+```
+[1]  TRUE FALSE FALSE
+```
+
+```
+[1] FALSE  TRUE FALSE
+```
+]
+
+---
+count: false
+ 
+
+.panel1-logical-auto[
+
+```r
+x &lt;- 1
+x &gt; 0
+x &gt; 2
+x == 1
+x != 2
+!(x == x)
+"s" == "S"
+1 &gt; 0 | 0 &gt; 1
+1 &gt; 0 &amp; 0 &gt; 1
+
+# Element-wise logical statements
+x &lt;- c(-1, 0, 1)
+x &lt; 0
+x == 0
+*1 %in% x
+```
+]
+ 
+.panel2-logical-auto[
+
+```
+[1] TRUE
+```
+
+```
+[1] FALSE
+```
+
+```
+[1] TRUE
+```
+
+```
+[1] TRUE
+```
+
+```
+[1] FALSE
+```
+
+```
+[1] FALSE
+```
+
+```
+[1] TRUE
+```
+
+```
+[1] FALSE
+```
+
+```
+[1]  TRUE FALSE FALSE
+```
+
+```
+[1] FALSE  TRUE FALSE
+```
+
+```
+[1] TRUE
+```
+]
+
 &lt;style&gt;
 .panel1-logical-auto {
   color: black;
@@ -1370,6 +1628,33 @@ x != 2
 
 
 
+
+
+---
+# How do we use logical statements?
+
+- One common way is through the `ifelse()` command
+
+- `ifelse(LOGICAL STATEMENT, DO IF TRUE, DO IF FALSE)`
+
+
+```r
+x &lt;- c(0, 1, 2, 3, NA)
+ifelse(NA %in% x, "x contains a missing value", "x does not contain a missing value")
+```
+
+```
+[1] "x contains a missing value"
+```
+
+```r
+x &lt;- c(0, 1, 2, 3)
+ifelse(NA %in% x, "x contains a missing value", "x does not contain a missing value")
+```
+
+```
+[1] "x does not contain a missing value"
+```
 
 
 &lt;!-- adjust font size in this css code chunk --&gt;
