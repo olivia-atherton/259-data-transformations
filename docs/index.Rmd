@@ -47,8 +47,7 @@ library(icons) #https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free
 ---
 # How can R data processing help us minimize mistakes?
 - Code *is* documentation
-- Code can automate data transfer/data processing without human input
-
+- Transform data with less human intervention
 - But coding errors are also common...what can we do to make sure that our code works?
   * Instead of “hard” coding based on position (such as ds[1, 2]), filter and select by name and logical conditions
   * Use good coding practices to clean up variable names to make them human-readable
@@ -213,9 +212,8 @@ ifelse(NA %in% x, "x contains a missing value", "x does not contain a missing va
   * `filter()` and `slice()` to subset data by rows
   * `select()` to subset data by columns
   * `rename()` to rename columns
-  * `relocate()` to move columns
   * `mutate()` to add or change columns (or their values)
-  * `summarize()` to calculate summary statistics over rows of data
+  * `summarize()` and `count()` to calculate summary statistics over rows of data
   * `group_by()` to perform operations within subsets of data
   * and many more...
 
@@ -259,9 +257,30 @@ select(ds, is.numeric) #ROTATE
 select(ds, is.character) #ROTATE
 ```
 
-<!-- adjust font size in this css code chunk -->
+---
+`r chunk_reveal("noassignment", break_type = "auto", widths = c(1, 1))`
+
+```{r noassignment, include = FALSE}
+select(ds, name, height, eye_color)
+arrange(ds, height, eye_color)
+ds
+```
+
+---
+`r chunk_reveal("reassignment", break_type = "auto", left_assign = T, widths = c(1, 1))`
+
+```{r reassignment, include = FALSE}
+ds <- select(ds, name, height, eye_color)
+ds <- arrange(ds, height, eye_color)
+ds <- filter(ds, height > 100)
+```
+
+
+
+
+<!-- adjust font size and other formatting defs in this css code chunk -->
 ```{css, eval = TRUE, echo = FALSE}
-.remark-code{line-height: 1.5; font-size: 70%}
+.remark-code{line-height: 1; font-size: 70%}
 
 @media print {
   .has-continuation {
