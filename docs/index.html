@@ -59,7 +59,7 @@ class: center, middle, inverse, title-slide
 &lt;svg viewBox="0 0 496 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt; Follow along from the [Github repo](https://github.com/psych-259-data-science-2022/259-langbasics-importing)
 ]
 
-.footnote[.small[.bold[Last updated: 2022-01-17]]]
+.footnote[.small[.bold[Last updated: 2022-01-18]]]
 
 ---
 # Data types
@@ -990,7 +990,7 @@ x &lt;- c(1, 2, 3, NULL)
 ---
 # Logical comparisons 
 
-- Comparisons between values that result in a logical output (TRUE/FALSE)
+- Comparisons between values that result in TRUE/FALSE
 
 - Greater than/less than (&gt;, &gt;=, &lt;, &lt;=)
 
@@ -1003,6 +1003,8 @@ x &lt;- c(1, 2, 3, NULL)
 - And (&amp;)
 
 - Or (|)
+
+- %in%
 
 ---
 count: false
@@ -1641,6 +1643,16 @@ ifelse(NA %in% x, "x contains a missing value", "x does not contain a missing va
   * and many more...
 
 ---
+# Each dplyr function uses a similar structure
+- `function(data, something_to_do_with_columns)`
+
+- In base R, you often need to specify the dataset over and over to access the columns: `ds[ds$col1 == 1, 0]`
+
+- In dplyr functions, the data argument lets you work with column names without ever using `$`. The data argument also lets you access the columns directly without using quoted expressions
+
+- Most dplyr functions return the entire tibble back as an output
+
+---
 count: false
  
 ## Arrange (sorting data)
@@ -2136,10 +2148,10 @@ count: false
 
 ```
 # A tibble: 2 × 14
-  name     height  mass hair_color skin_color eye_color birth_year sex   gender 
-  &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  
-1 San Hill    191    NA none       grey       gold              NA male  mascul…
-2 Wat Tam…    193    48 none       green, gr… unknown           NA male  mascul…
+  name    height  mass hair_color skin_color  eye_color birth_year sex   gender 
+  &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  
+1 R2-D2       96    32 &lt;NA&gt;       white, blue red               33 none  mascul…
+2 Nute G…    191    90 none       mottled gr… red               NA male  mascul…
 # … with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -2162,8 +2174,8 @@ count: false
 # A tibble: 2 × 14
   name     height  mass hair_color skin_color eye_color birth_year sex   gender 
   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  
-1 Mace Wi…    188    84 none       dark       brown             72 male  mascul…
-2 Jango F…    183    79 black      tan        brown             66 male  mascul…
+1 Dormé       165    NA brown      light      brown             NA fema… femini…
+2 Cliegg …    183    NA brown      fair       blue              82 male  mascul…
 # … with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -2534,6 +2546,9 @@ count: false
 
 
 
+
+---
+# Comparison to base R
 
 ---
 count: false
@@ -2912,6 +2927,53 @@ ds_sorted_filtered &lt;- filter(ds_sorted, height &lt; 70)
 ```
 ]
 
+---
+count: false
+ 
+# Not a good strategy
+.panel1-intermed-auto[
+
+```r
+ds &lt;- starwars
+ds_name_height_eye_color &lt;- select(ds, name, height, eye_color)
+ds_sorted &lt;- arrange(ds_name_height_eye_color, height, eye_color)
+ds_sorted_filtered &lt;- filter(ds_sorted, height &lt; 70)
+ds_sorted_filtered
+
+*ls()
+```
+]
+ 
+.panel2-intermed-auto[
+
+```
+# A tibble: 1 × 3
+  name  height eye_color
+  &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;    
+1 Yoda      66 brown    
+```
+
+```
+ [1] "break_type"               "chunk_name"              
+ [3] "chunk_options"            "code_seq"                
+ [5] "code_seq_lag"             "code_seq_lag2"           
+ [7] "code_seq_start"           "code_seq_target"         
+ [9] "color"                    "display_type"            
+[11] "ds"                       "ds_name_height_eye_color"
+[13] "ds_sorted"                "ds_sorted_filtered"      
+[15] "float"                    "font_size_code"          
+[17] "func_seq"                 "lang"                    
+[19] "left_assign"              "left_assign_add"         
+[21] "md"                       "md2"                     
+[23] "num_breaks"               "omit"                    
+[25] "replace"                  "replace2"                
+[27] "replace3"                 "replacements"            
+[29] "replacements2"            "replacements3"           
+[31] "text"                     "title"                   
+[33] "widths"                  
+```
+]
+
 &lt;style&gt;
 .panel1-intermed-auto {
   color: black;
@@ -3201,20 +3263,323 @@ ds
 
 
 ---
-# `ds &lt;- ds %&gt;%` is not the most intuitive
+# This is not the most intuitive thing at first
 
-- There are options, but I stick with it as it's the most common to see
+All the options below are equivalent, but I stick with `ds &lt;- ds %&gt;%` because it's the most common to see
 
 
 ```r
-ds &lt;- ds %&gt;% select(height) %&gt;% slice_sample(n = 5)
+ds &lt;- ds %&gt;% select(height) %&gt;% slice_tail(n = 5)
 
-ds %&gt;% select(height) %&gt;% slice_sample(n = 5) -&gt; ds
+ds %&gt;% select(height) %&gt;% slice_tail(n = 5) -&gt; ds
 
-ds &lt;- select(ds, height) %&gt;% slice_sample(n = 5)
+ds &lt;- select(ds, height) %&gt;% slice_tail(n = 5)
 
-ds &lt;- slice_sample(select(ds, height), n = 5)
+ds &lt;- slice_tail(select(ds, height), n = 5)
 ```
+
+---
+# Mutate and summarize
+
+- Mutate adds/modifies columns; dataset remains the same size
+- Summarize collapses the data set down (by default to 1 row) to calculate summary statistics
+- Both functions use a similar form:
+  * `mutate(data, new_variable = expression)`
+  * `summarize(data, mean = mean(var))`
+- Like all other dplyr functions, they return tibbles, so for mutate to "stick" it needs to be assigned back to itself:
+  * `data &lt;- mutate(data, var_to_round = round(var_to_round))`
+- Since summarize collapses to a new level, you might not want to assign it to overwrite the original data set!
+
+---
+count: false
+ 
+# Mutate (add or modify columns)
+.panel1-mutate-auto[
+
+```r
+*ds &lt;- starwars %&gt;% select(name, mass, height, hair_color)
+
+ds
+```
+]
+ 
+.panel2-mutate-auto[
+
+```
+# A tibble: 87 × 4
+   name                mass height hair_color   
+   &lt;chr&gt;              &lt;dbl&gt;  &lt;int&gt; &lt;chr&gt;        
+ 1 Luke Skywalker        77    172 blond        
+ 2 C-3PO                 75    167 &lt;NA&gt;         
+ 3 R2-D2                 32     96 &lt;NA&gt;         
+ 4 Darth Vader          136    202 none         
+ 5 Leia Organa           49    150 brown        
+ 6 Owen Lars            120    178 brown, grey  
+ 7 Beru Whitesun lars    75    165 brown        
+ 8 R5-D4                 32     97 &lt;NA&gt;         
+ 9 Biggs Darklighter     84    183 black        
+10 Obi-Wan Kenobi        77    182 auburn, white
+# … with 77 more rows
+```
+]
+
+---
+count: false
+ 
+# Mutate (add or modify columns)
+.panel1-mutate-auto[
+
+```r
+ds &lt;- starwars %&gt;% select(name, mass, height, hair_color)
+*ds &lt;- ds %&gt;% mutate(in_movie = "yes")
+
+ds
+```
+]
+ 
+.panel2-mutate-auto[
+
+```
+# A tibble: 87 × 5
+   name                mass height hair_color    in_movie
+   &lt;chr&gt;              &lt;dbl&gt;  &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;   
+ 1 Luke Skywalker        77    172 blond         yes     
+ 2 C-3PO                 75    167 &lt;NA&gt;          yes     
+ 3 R2-D2                 32     96 &lt;NA&gt;          yes     
+ 4 Darth Vader          136    202 none          yes     
+ 5 Leia Organa           49    150 brown         yes     
+ 6 Owen Lars            120    178 brown, grey   yes     
+ 7 Beru Whitesun lars    75    165 brown         yes     
+ 8 R5-D4                 32     97 &lt;NA&gt;          yes     
+ 9 Biggs Darklighter     84    183 black         yes     
+10 Obi-Wan Kenobi        77    182 auburn, white yes     
+# … with 77 more rows
+```
+]
+
+---
+count: false
+ 
+# Mutate (add or modify columns)
+.panel1-mutate-auto[
+
+```r
+ds &lt;- starwars %&gt;% select(name, mass, height, hair_color)
+ds &lt;- ds %&gt;% mutate(in_movie = "yes")
+*ds &lt;- ds %&gt;% mutate(height_m = height/100,
+*                   bmi = mass/(height_m^2),
+*                   bmi = round(bmi))
+
+ds
+```
+]
+ 
+.panel2-mutate-auto[
+
+```
+# A tibble: 87 × 7
+   name                mass height hair_color    in_movie height_m   bmi
+   &lt;chr&gt;              &lt;dbl&gt;  &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+ 1 Luke Skywalker        77    172 blond         yes          1.72    26
+ 2 C-3PO                 75    167 &lt;NA&gt;          yes          1.67    27
+ 3 R2-D2                 32     96 &lt;NA&gt;          yes          0.96    35
+ 4 Darth Vader          136    202 none          yes          2.02    33
+ 5 Leia Organa           49    150 brown         yes          1.5     22
+ 6 Owen Lars            120    178 brown, grey   yes          1.78    38
+ 7 Beru Whitesun lars    75    165 brown         yes          1.65    28
+ 8 R5-D4                 32     97 &lt;NA&gt;          yes          0.97    34
+ 9 Biggs Darklighter     84    183 black         yes          1.83    25
+10 Obi-Wan Kenobi        77    182 auburn, white yes          1.82    23
+# … with 77 more rows
+```
+]
+
+---
+count: false
+ 
+# Mutate (add or modify columns)
+.panel1-mutate-auto[
+
+```r
+ds &lt;- starwars %&gt;% select(name, mass, height, hair_color)
+ds &lt;- ds %&gt;% mutate(in_movie = "yes")
+ds &lt;- ds %&gt;% mutate(height_m = height/100,
+                    bmi = mass/(height_m^2),
+                    bmi = round(bmi)) %&gt;%
+*           arrange(desc(bmi))
+
+ds
+```
+]
+ 
+.panel2-mutate-auto[
+
+```
+# A tibble: 87 × 7
+   name                   mass height hair_color  in_movie height_m   bmi
+   &lt;chr&gt;                 &lt;dbl&gt;  &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+ 1 Jabba Desilijic Tiure  1358    175 &lt;NA&gt;        yes          1.75   443
+ 2 Dud Bolt                 45     94 none        yes          0.94    51
+ 3 Yoda                     17     66 white       yes          0.66    39
+ 4 Owen Lars               120    178 brown, grey yes          1.78    38
+ 5 R2-D2                    32     96 &lt;NA&gt;        yes          0.96    35
+ 6 IG-88                   140    200 none        yes          2       35
+ 7 R5-D4                    32     97 &lt;NA&gt;        yes          0.97    34
+ 8 Jek Tono Porkins        110    180 brown       yes          1.8     34
+ 9 Grievous                159    216 none        yes          2.16    34
+10 Darth Vader             136    202 none        yes          2.02    33
+# … with 77 more rows
+```
+]
+
+---
+count: false
+ 
+# Mutate (add or modify columns)
+.panel1-mutate-auto[
+
+```r
+ds &lt;- starwars %&gt;% select(name, mass, height, hair_color)
+ds &lt;- ds %&gt;% mutate(in_movie = "yes")
+ds &lt;- ds %&gt;% mutate(height_m = height/100,
+                    bmi = mass/(height_m^2),
+                    bmi = round(bmi)) %&gt;%
+            arrange(desc(bmi))
+
+*ds &lt;- ds
+
+ds
+```
+]
+ 
+.panel2-mutate-auto[
+
+```
+# A tibble: 87 × 7
+   name                   mass height hair_color  in_movie height_m   bmi
+   &lt;chr&gt;                 &lt;dbl&gt;  &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+ 1 Jabba Desilijic Tiure  1358    175 &lt;NA&gt;        yes          1.75   443
+ 2 Dud Bolt                 45     94 none        yes          0.94    51
+ 3 Yoda                     17     66 white       yes          0.66    39
+ 4 Owen Lars               120    178 brown, grey yes          1.78    38
+ 5 R2-D2                    32     96 &lt;NA&gt;        yes          0.96    35
+ 6 IG-88                   140    200 none        yes          2       35
+ 7 R5-D4                    32     97 &lt;NA&gt;        yes          0.97    34
+ 8 Jek Tono Porkins        110    180 brown       yes          1.8     34
+ 9 Grievous                159    216 none        yes          2.16    34
+10 Darth Vader             136    202 none        yes          2.02    33
+# … with 77 more rows
+```
+]
+
+---
+count: false
+ 
+# Mutate (add or modify columns)
+.panel1-mutate-auto[
+
+```r
+ds &lt;- starwars %&gt;% select(name, mass, height, hair_color)
+ds &lt;- ds %&gt;% mutate(in_movie = "yes")
+ds &lt;- ds %&gt;% mutate(height_m = height/100,
+                    bmi = mass/(height_m^2),
+                    bmi = round(bmi)) %&gt;%
+            arrange(desc(bmi))
+
+ds &lt;- ds %&gt;%
+* filter(hair_color %in% c("blond", NA))
+
+ds
+```
+]
+ 
+.panel2-mutate-auto[
+
+```
+# A tibble: 8 × 7
+  name                   mass height hair_color in_movie height_m   bmi
+  &lt;chr&gt;                 &lt;dbl&gt;  &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+1 Jabba Desilijic Tiure  1358    175 &lt;NA&gt;       yes          1.75   443
+2 R2-D2                    32     96 &lt;NA&gt;       yes          0.96    35
+3 R5-D4                    32     97 &lt;NA&gt;       yes          0.97    34
+4 C-3PO                    75    167 &lt;NA&gt;       yes          1.67    27
+5 Luke Skywalker           77    172 blond      yes          1.72    26
+6 Greedo                   74    173 &lt;NA&gt;       yes          1.73    25
+7 Anakin Skywalker         84    188 blond      yes          1.88    24
+8 Finis Valorum            NA    170 blond      yes          1.7     NA
+```
+]
+
+---
+count: false
+ 
+# Mutate (add or modify columns)
+.panel1-mutate-auto[
+
+```r
+ds &lt;- starwars %&gt;% select(name, mass, height, hair_color)
+ds &lt;- ds %&gt;% mutate(in_movie = "yes")
+ds &lt;- ds %&gt;% mutate(height_m = height/100,
+                    bmi = mass/(height_m^2),
+                    bmi = round(bmi)) %&gt;%
+            arrange(desc(bmi))
+
+ds &lt;- ds %&gt;%
+  filter(hair_color %in% c("blond", NA)) %&gt;%
+* mutate(hair_color = ifelse(is.na(hair_color),"no hair", hair_color),
+*        mass = ifelse(mass &gt; 1000, "huge", "not huge"))
+
+ds
+```
+]
+ 
+.panel2-mutate-auto[
+
+```
+# A tibble: 8 × 7
+  name                  mass     height hair_color in_movie height_m   bmi
+  &lt;chr&gt;                 &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+1 Jabba Desilijic Tiure huge        175 no hair    yes          1.75   443
+2 R2-D2                 not huge     96 no hair    yes          0.96    35
+3 R5-D4                 not huge     97 no hair    yes          0.97    34
+4 C-3PO                 not huge    167 no hair    yes          1.67    27
+5 Luke Skywalker        not huge    172 blond      yes          1.72    26
+6 Greedo                not huge    173 no hair    yes          1.73    25
+7 Anakin Skywalker      not huge    188 blond      yes          1.88    24
+8 Finis Valorum         &lt;NA&gt;        170 blond      yes          1.7     NA
+```
+]
+
+&lt;style&gt;
+.panel1-mutate-auto {
+  color: black;
+  width: 81.6666666666667%;
+  hight: 32%;
+  float: none;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-mutate-auto {
+  color: black;
+  width: 16.3333333333333%;
+  hight: 32%;
+  float: none;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-mutate-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: none;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+
 
 &lt;!-- adjust font size and other formatting defs in this css code chunk --&gt;
 &lt;style type="text/css"&gt;
