@@ -108,7 +108,7 @@ library(icons) #https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free
   * `is.numeric()`, `is.character()`
 
 ---
-`r chunk_reveal("types", break_type = "auto", widths = c(2, 1))`
+`r chunk_reveal("types", break_type = "auto", widths = c(2, 1), title = "## Data types")`
 
 ```{r types, include = FALSE}
 x <- 1
@@ -168,7 +168,7 @@ x
 - Or (|)
 
 ---
-`r chunk_reveal("logical", break_type = "auto", widths = c(2, 1))`
+`r chunk_reveal("logical", break_type = "auto", widths = c(2, 1), title = "# Logical comparisons")`
 
 ```{r logical, include = FALSE}
 x <- 1
@@ -218,7 +218,7 @@ ifelse(NA %in% x, "x contains a missing value", "x does not contain a missing va
   * and many more...
 
 ---
-`r chunk_reveal("arrange", break_type = "rotate", float = "none", widths = c(5, 1))`
+`r chunk_reveal("arrange", break_type = "rotate", float = "none", widths = c(5, 1), title = "## Arrange (sorting data)")`
 
 ```{r arrange, include = FALSE}
 library(tidyverse) #loads dplyr
@@ -231,7 +231,7 @@ arrange(ds, eye_color, hair_color) #ROTATE
 ```
 
 ---
-`r chunk_reveal("filter", break_type = "rotate", float = "none", widths = c(5, 1))`
+`r chunk_reveal("filter", break_type = "rotate", float = "none", widths = c(5, 1), title = "# Filter (subsetting rows)")`
 
 ```{r filter, include = FALSE}
 filter(ds, height < 100) #ROTATE
@@ -243,7 +243,19 @@ filter(ds, !(eye_color %in% c("blue","brown"))) #ROTATE
 ```
 
 ---
-`r chunk_reveal("select", break_type = "rotate", float = "none", widths = c(5, 1))`
+`r chunk_reveal("slice", break_type = "rotate", float = "none", widths = c(5, 1), title = "# Slice (subsetting rows by position)")`
+
+```{r filter, include = FALSE}
+slice(ds, 1:5) #ROTATE
+slice_head(ds, n = 5) #ROTATE
+slice_tail(ds, n = 4) #ROTATE
+slice_sample(ds, n = 2) #ROTATE
+slice_sample(ds, n = 2) #ROTATE
+slice_min(ds, height, n = 3) #ROTATE
+```
+
+---
+`r chunk_reveal("select", break_type = "rotate", float = "none", widths = c(5, 1), title = "# Select (subsetting columns)")`
 
 ```{r select, include = FALSE}
 select(ds, name) #ROTATE
@@ -258,31 +270,31 @@ select(ds, is.character) #ROTATE
 ```
 
 ---
-`r chunk_reveal("noassignment", break_type = "auto", widths = c(1, 1))`
+`r chunk_reveal("noassignment", break_type = "auto", widths = c(1, 1), title = "# What's going on here?")`
 
 ```{r noassignment, include = FALSE}
 select(ds, name, height, eye_color)
-filter(ds, height < 100)
+filter(ds, height < 70)
 ds
 ```
 
 ---
-`r chunk_reveal("reassignment", break_type = "auto", left_assign = T, widths = c(1, 1))`
+`r chunk_reveal("reassignment", break_type = "auto", left_assign = T, widths = c(1, 1), title = "# Reassign the transformations back to the tibble")`
 
 ```{r reassignment, include = FALSE}
 ds <- select(ds, name, height, eye_color)
 ds <- arrange(ds, height, eye_color)
-ds <- filter(ds, height < 100)
+ds <- filter(ds, height < 70)
 ```
 
 ---
-`r chunk_reveal("intermed", break_type = "auto", float = "none", widths = c(5, 1), title = "## Not a good strategy")`
+`r chunk_reveal("intermed", break_type = "auto", float = "none", widths = c(5, 1), title = "# Not a good strategy")`
 
 ```{r intermed, include = FALSE}
 ds <- starwars
 ds_name_height_eye_color <- select(ds, name, height, eye_color)
 ds_sorted <- arrange(ds_name_height_eye_color, height, eye_color)
-ds_sorted_filtered <- filter(ds_sorted, height < 100)
+ds_sorted_filtered <- filter(ds_sorted, height < 70)
 ds_sorted_filtered
 ```
 
