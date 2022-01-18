@@ -2390,7 +2390,7 @@ count: false
 
 ```r
 select(ds, name, height, eye_color)
-*arrange(ds, height, eye_color)
+*filter(ds, height &lt; 100)
 ```
 ]
  
@@ -2414,21 +2414,18 @@ select(ds, name, height, eye_color)
 ```
 
 ```
-# A tibble: 87 × 14
-   name     height  mass hair_color skin_color eye_color birth_year sex   gender
-   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
- 1 Yoda         66    17 white      green      brown            896 male  mascu…
- 2 Ratts T…     79    15 none       grey, blue unknown           NA male  mascu…
- 3 Wicket …     88    20 brown      brown      brown              8 male  mascu…
- 4 Dud Bolt     94    45 none       blue, grey yellow            NA male  mascu…
- 5 R2-D2        96    32 &lt;NA&gt;       white, bl… red               33 none  mascu…
- 6 R4-P17       96    NA none       silver, r… red, blue         NA none  femin…
- 7 R5-D4        97    32 &lt;NA&gt;       white, red red               NA none  mascu…
- 8 Sebulba     112    40 none       grey, red  orange            NA male  mascu…
- 9 Gasgano     122    NA none       white, bl… black             NA male  mascu…
-10 Watto       137    NA black      blue, grey yellow            NA male  mascu…
-# … with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
-#   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;
+# A tibble: 7 × 14
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 R2-D2         96    32 &lt;NA&gt;       white, bl… red               33 none  mascu…
+2 R5-D4         97    32 &lt;NA&gt;       white, red red               NA none  mascu…
+3 Yoda          66    17 white      green      brown            896 male  mascu…
+4 Wicket S…     88    20 brown      brown      brown              8 male  mascu…
+5 Dud Bolt      94    45 none       blue, grey yellow            NA male  mascu…
+6 Ratts Ty…     79    15 none       grey, blue unknown           NA male  mascu…
+7 R4-P17        96    NA none       silver, r… red, blue         NA none  femin…
+# … with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
 ]
 
@@ -2440,77 +2437,7 @@ count: false
 
 ```r
 select(ds, name, height, eye_color)
-arrange(ds, height, eye_color)
-*filter(ds, height &gt; 100)
-```
-]
- 
-.panel2-noassignment-auto[
-
-```
-# A tibble: 87 × 3
-   name               height eye_color
-   &lt;chr&gt;               &lt;int&gt; &lt;chr&gt;    
- 1 Luke Skywalker        172 blue     
- 2 C-3PO                 167 yellow   
- 3 R2-D2                  96 red      
- 4 Darth Vader           202 yellow   
- 5 Leia Organa           150 brown    
- 6 Owen Lars             178 blue     
- 7 Beru Whitesun lars    165 blue     
- 8 R5-D4                  97 red      
- 9 Biggs Darklighter     183 brown    
-10 Obi-Wan Kenobi        182 blue-gray
-# … with 77 more rows
-```
-
-```
-# A tibble: 87 × 14
-   name     height  mass hair_color skin_color eye_color birth_year sex   gender
-   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
- 1 Yoda         66    17 white      green      brown            896 male  mascu…
- 2 Ratts T…     79    15 none       grey, blue unknown           NA male  mascu…
- 3 Wicket …     88    20 brown      brown      brown              8 male  mascu…
- 4 Dud Bolt     94    45 none       blue, grey yellow            NA male  mascu…
- 5 R2-D2        96    32 &lt;NA&gt;       white, bl… red               33 none  mascu…
- 6 R4-P17       96    NA none       silver, r… red, blue         NA none  femin…
- 7 R5-D4        97    32 &lt;NA&gt;       white, red red               NA none  mascu…
- 8 Sebulba     112    40 none       grey, red  orange            NA male  mascu…
- 9 Gasgano     122    NA none       white, bl… black             NA male  mascu…
-10 Watto       137    NA black      blue, grey yellow            NA male  mascu…
-# … with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
-#   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;
-```
-
-```
-# A tibble: 74 × 14
-   name    height  mass hair_color  skin_color eye_color birth_year sex   gender
-   &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
- 1 Luke S…    172    77 blond       fair       blue            19   male  mascu…
- 2 C-3PO      167    75 &lt;NA&gt;        gold       yellow         112   none  mascu…
- 3 Darth …    202   136 none        white      yellow          41.9 male  mascu…
- 4 Leia O…    150    49 brown       light      brown           19   fema… femin…
- 5 Owen L…    178   120 brown, grey light      blue            52   male  mascu…
- 6 Beru W…    165    75 brown       light      blue            47   fema… femin…
- 7 Biggs …    183    84 black       light      brown           24   male  mascu…
- 8 Obi-Wa…    182    77 auburn, wh… fair       blue-gray       57   male  mascu…
- 9 Anakin…    188    84 blond       fair       blue            41.9 male  mascu…
-10 Wilhuf…    180    NA auburn, gr… fair       blue            64   male  mascu…
-# … with 64 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
-#   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;
-```
-]
-
----
-count: false
- 
-
-.panel1-noassignment-auto[
-
-```r
-select(ds, name, height, eye_color)
-arrange(ds, height, eye_color)
-filter(ds, height &gt; 100)
+filter(ds, height &lt; 100)
 *ds
 ```
 ]
@@ -2535,39 +2462,18 @@ filter(ds, height &gt; 100)
 ```
 
 ```
-# A tibble: 87 × 14
-   name     height  mass hair_color skin_color eye_color birth_year sex   gender
-   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
- 1 Yoda         66    17 white      green      brown            896 male  mascu…
- 2 Ratts T…     79    15 none       grey, blue unknown           NA male  mascu…
- 3 Wicket …     88    20 brown      brown      brown              8 male  mascu…
- 4 Dud Bolt     94    45 none       blue, grey yellow            NA male  mascu…
- 5 R2-D2        96    32 &lt;NA&gt;       white, bl… red               33 none  mascu…
- 6 R4-P17       96    NA none       silver, r… red, blue         NA none  femin…
- 7 R5-D4        97    32 &lt;NA&gt;       white, red red               NA none  mascu…
- 8 Sebulba     112    40 none       grey, red  orange            NA male  mascu…
- 9 Gasgano     122    NA none       white, bl… black             NA male  mascu…
-10 Watto       137    NA black      blue, grey yellow            NA male  mascu…
-# … with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
-#   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;
-```
-
-```
-# A tibble: 74 × 14
-   name    height  mass hair_color  skin_color eye_color birth_year sex   gender
-   &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
- 1 Luke S…    172    77 blond       fair       blue            19   male  mascu…
- 2 C-3PO      167    75 &lt;NA&gt;        gold       yellow         112   none  mascu…
- 3 Darth …    202   136 none        white      yellow          41.9 male  mascu…
- 4 Leia O…    150    49 brown       light      brown           19   fema… femin…
- 5 Owen L…    178   120 brown, grey light      blue            52   male  mascu…
- 6 Beru W…    165    75 brown       light      blue            47   fema… femin…
- 7 Biggs …    183    84 black       light      brown           24   male  mascu…
- 8 Obi-Wa…    182    77 auburn, wh… fair       blue-gray       57   male  mascu…
- 9 Anakin…    188    84 blond       fair       blue            41.9 male  mascu…
-10 Wilhuf…    180    NA auburn, gr… fair       blue            64   male  mascu…
-# … with 64 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
-#   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;
+# A tibble: 7 × 14
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 R2-D2         96    32 &lt;NA&gt;       white, bl… red               33 none  mascu…
+2 R5-D4         97    32 &lt;NA&gt;       white, red red               NA none  mascu…
+3 Yoda          66    17 white      green      brown            896 male  mascu…
+4 Wicket S…     88    20 brown      brown      brown              8 male  mascu…
+5 Dud Bolt      94    45 none       blue, grey yellow            NA male  mascu…
+6 Ratts Ty…     79    15 none       grey, blue unknown           NA male  mascu…
+7 R4-P17        96    NA none       silver, r… red, blue         NA none  femin…
+# … with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
 
 ```
@@ -2696,7 +2602,7 @@ count: false
 ```r
 ds &lt;- select(ds, name, height, eye_color)
 ds &lt;- arrange(ds, height, eye_color)
-*ds &lt;- filter(ds, height &gt; 100)
+*ds &lt;- filter(ds, height &lt; 100)
 
 ds
 ```
@@ -2705,20 +2611,16 @@ ds
 .panel2-reassignment-auto[
 
 ```
-# A tibble: 74 × 3
-   name               height eye_color
-   &lt;chr&gt;               &lt;int&gt; &lt;chr&gt;    
- 1 Sebulba               112 orange   
- 2 Gasgano               122 black    
- 3 Watto                 137 yellow   
- 4 Mon Mothma            150 blue     
- 5 Leia Organa           150 brown    
- 6 Cordé                 157 brown    
- 7 Nien Nunb             160 black    
- 8 Shmi Skywalker        163 brown    
- 9 Ben Quadinaros        163 orange   
-10 Beru Whitesun lars    165 blue     
-# … with 64 more rows
+# A tibble: 7 × 3
+  name                  height eye_color
+  &lt;chr&gt;                  &lt;int&gt; &lt;chr&gt;    
+1 Yoda                      66 brown    
+2 Ratts Tyerell             79 unknown  
+3 Wicket Systri Warrick     88 brown    
+4 Dud Bolt                  94 yellow   
+5 R2-D2                     96 red      
+6 R4-P17                    96 red, blue
+7 R5-D4                     97 red      
 ```
 ]
 
@@ -2749,6 +2651,133 @@ ds
 }
 &lt;/style&gt;
 
+
+
+
+
+---
+count: false
+ 
+## Not a good strategy
+.panel1-intermed-auto[
+
+```r
+*ds &lt;- starwars
+```
+]
+ 
+.panel2-intermed-auto[
+
+]
+
+---
+count: false
+ 
+## Not a good strategy
+.panel1-intermed-auto[
+
+```r
+ds &lt;- starwars
+*ds_name_height_eye_color &lt;- select(ds, name, height, eye_color)
+```
+]
+ 
+.panel2-intermed-auto[
+
+]
+
+---
+count: false
+ 
+## Not a good strategy
+.panel1-intermed-auto[
+
+```r
+ds &lt;- starwars
+ds_name_height_eye_color &lt;- select(ds, name, height, eye_color)
+*ds_sorted &lt;- arrange(ds_name_height_eye_color, height, eye_color)
+```
+]
+ 
+.panel2-intermed-auto[
+
+]
+
+---
+count: false
+ 
+## Not a good strategy
+.panel1-intermed-auto[
+
+```r
+ds &lt;- starwars
+ds_name_height_eye_color &lt;- select(ds, name, height, eye_color)
+ds_sorted &lt;- arrange(ds_name_height_eye_color, height, eye_color)
+*ds_sorted_filtered &lt;- filter(ds_sorted, height &lt; 100)
+```
+]
+ 
+.panel2-intermed-auto[
+
+]
+
+---
+count: false
+ 
+## Not a good strategy
+.panel1-intermed-auto[
+
+```r
+ds &lt;- starwars
+ds_name_height_eye_color &lt;- select(ds, name, height, eye_color)
+ds_sorted &lt;- arrange(ds_name_height_eye_color, height, eye_color)
+ds_sorted_filtered &lt;- filter(ds_sorted, height &lt; 100)
+*ds_sorted_filtered
+```
+]
+ 
+.panel2-intermed-auto[
+
+```
+# A tibble: 7 × 3
+  name                  height eye_color
+  &lt;chr&gt;                  &lt;int&gt; &lt;chr&gt;    
+1 Yoda                      66 brown    
+2 Ratts Tyerell             79 unknown  
+3 Wicket Systri Warrick     88 brown    
+4 Dud Bolt                  94 yellow   
+5 R2-D2                     96 red      
+6 R4-P17                    96 red, blue
+7 R5-D4                     97 red      
+```
+]
+
+&lt;style&gt;
+.panel1-intermed-auto {
+  color: black;
+  width: 81.6666666666667%;
+  hight: 32%;
+  float: none;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-intermed-auto {
+  color: black;
+  width: 16.3333333333333%;
+  hight: 32%;
+  float: none;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-intermed-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: none;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
 
 
 

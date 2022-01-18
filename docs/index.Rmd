@@ -262,7 +262,7 @@ select(ds, is.character) #ROTATE
 
 ```{r noassignment, include = FALSE}
 select(ds, name, height, eye_color)
-arrange(ds, height, eye_color)
+filter(ds, height < 100)
 ds
 ```
 
@@ -272,9 +272,19 @@ ds
 ```{r reassignment, include = FALSE}
 ds <- select(ds, name, height, eye_color)
 ds <- arrange(ds, height, eye_color)
-ds <- filter(ds, height > 100)
+ds <- filter(ds, height < 100)
 ```
 
+---
+`r chunk_reveal("intermed", break_type = "auto", float = "none", widths = c(5, 1), title = "## Not a good strategy")`
+
+```{r intermed, include = FALSE}
+ds <- starwars
+ds_name_height_eye_color <- select(ds, name, height, eye_color)
+ds_sorted <- arrange(ds_name_height_eye_color, height, eye_color)
+ds_sorted_filtered <- filter(ds_sorted, height < 100)
+ds_sorted_filtered
+```
 
 
 
