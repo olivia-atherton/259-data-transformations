@@ -2148,10 +2148,10 @@ count: false
 
 ```
 # A tibble: 2 × 14
-  name    height  mass hair_color skin_color  eye_color birth_year sex   gender 
-  &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  
-1 R2-D2       96    32 &lt;NA&gt;       white, blue red               33 none  mascul…
-2 Nute G…    191    90 none       mottled gr… red               NA male  mascul…
+  name    height  mass hair_color skin_color   eye_color birth_year sex   gender
+  &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 Shaak …    178    57 none       red, blue, … black             NA fema… femin…
+2 Mon Mo…    150    NA auburn     fair         blue              48 fema… femin…
 # … with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -2174,8 +2174,8 @@ count: false
 # A tibble: 2 × 14
   name     height  mass hair_color skin_color eye_color birth_year sex   gender 
   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  
-1 Dormé       165    NA brown      light      brown             NA fema… femini…
-2 Cliegg …    183    NA brown      fair       blue              82 male  mascul…
+1 Quarsh …    183    NA black      dark       brown             62 &lt;NA&gt;  &lt;NA&gt;   
+2 Yoda         66    17 white      green      brown            896 male  mascul…
 # … with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -3287,7 +3287,8 @@ ds &lt;- slice_tail(select(ds, height), n = 5)
   * `mutate(data, new_variable = expression)`
   * `summarize(data, mean = mean(var))`
 - Like all other dplyr functions, they return tibbles, so for mutate to "stick" it needs to be assigned back to itself:
-  * `data &lt;- mutate(data, var_to_round = round(var_to_round))`
+  * `data &lt;- mutate(data, var = round(var))`
+  * `data &lt;- mutate(data, var_r = round(var))`
 - Since summarize collapses to a new level, you might not want to assign it to overwrite the original data set!
 
 ---
@@ -3572,6 +3573,270 @@ ds
   width: NA%;
   hight: 33%;
   float: none;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+
+
+---
+count: false
+ 
+# Summarize (calculate variables in aggregate)
+.panel1-summarize-auto[
+
+```r
+*ds &lt;- starwars %&gt;% select(name, mass, height, species)
+```
+]
+ 
+.panel2-summarize-auto[
+
+]
+
+---
+count: false
+ 
+# Summarize (calculate variables in aggregate)
+.panel1-summarize-auto[
+
+```r
+ds &lt;- starwars %&gt;% select(name, mass, height, species)
+*ds %&gt;% summarize(min_height = min(height))
+```
+]
+ 
+.panel2-summarize-auto[
+
+```
+# A tibble: 1 × 1
+  min_height
+       &lt;int&gt;
+1         NA
+```
+]
+
+---
+count: false
+ 
+# Summarize (calculate variables in aggregate)
+.panel1-summarize-auto[
+
+```r
+ds &lt;- starwars %&gt;% select(name, mass, height, species)
+ds %&gt;% summarize(min_height = min(height))
+*ds %&gt;% summarize(min_height = min(height, na.rm = T))
+```
+]
+ 
+.panel2-summarize-auto[
+
+```
+# A tibble: 1 × 1
+  min_height
+       &lt;int&gt;
+1         NA
+```
+
+```
+# A tibble: 1 × 1
+  min_height
+       &lt;int&gt;
+1         66
+```
+]
+
+---
+count: false
+ 
+# Summarize (calculate variables in aggregate)
+.panel1-summarize-auto[
+
+```r
+ds &lt;- starwars %&gt;% select(name, mass, height, species)
+ds %&gt;% summarize(min_height = min(height))
+ds %&gt;% summarize(min_height = min(height, na.rm = T))
+
+*ds %&gt;% summarize(min_height = min(height, na.rm = T),
+*                m_height = mean(height, na.rm = T),
+*                max_height = max(height, na.rm = T))
+```
+]
+ 
+.panel2-summarize-auto[
+
+```
+# A tibble: 1 × 1
+  min_height
+       &lt;int&gt;
+1         NA
+```
+
+```
+# A tibble: 1 × 1
+  min_height
+       &lt;int&gt;
+1         66
+```
+
+```
+# A tibble: 1 × 3
+  min_height m_height max_height
+       &lt;int&gt;    &lt;dbl&gt;      &lt;int&gt;
+1         66     174.        264
+```
+]
+
+---
+count: false
+ 
+# Summarize (calculate variables in aggregate)
+.panel1-summarize-auto[
+
+```r
+ds &lt;- starwars %&gt;% select(name, mass, height, species)
+ds %&gt;% summarize(min_height = min(height))
+ds %&gt;% summarize(min_height = min(height, na.rm = T))
+
+ds %&gt;% summarize(min_height = min(height, na.rm = T),
+                 m_height = mean(height, na.rm = T),
+                 max_height = max(height, na.rm = T))
+
+*ds %&gt;% group_by(species)
+```
+]
+ 
+.panel2-summarize-auto[
+
+```
+# A tibble: 1 × 1
+  min_height
+       &lt;int&gt;
+1         NA
+```
+
+```
+# A tibble: 1 × 1
+  min_height
+       &lt;int&gt;
+1         66
+```
+
+```
+# A tibble: 1 × 3
+  min_height m_height max_height
+       &lt;int&gt;    &lt;dbl&gt;      &lt;int&gt;
+1         66     174.        264
+```
+
+```
+# A tibble: 87 × 4
+# Groups:   species [38]
+   name                mass height species
+   &lt;chr&gt;              &lt;dbl&gt;  &lt;int&gt; &lt;chr&gt;  
+ 1 Luke Skywalker        77    172 Human  
+ 2 C-3PO                 75    167 Droid  
+ 3 R2-D2                 32     96 Droid  
+ 4 Darth Vader          136    202 Human  
+ 5 Leia Organa           49    150 Human  
+ 6 Owen Lars            120    178 Human  
+ 7 Beru Whitesun lars    75    165 Human  
+ 8 R5-D4                 32     97 Droid  
+ 9 Biggs Darklighter     84    183 Human  
+10 Obi-Wan Kenobi        77    182 Human  
+# … with 77 more rows
+```
+]
+
+---
+count: false
+ 
+# Summarize (calculate variables in aggregate)
+.panel1-summarize-auto[
+
+```r
+ds &lt;- starwars %&gt;% select(name, mass, height, species)
+ds %&gt;% summarize(min_height = min(height))
+ds %&gt;% summarize(min_height = min(height, na.rm = T))
+
+ds %&gt;% summarize(min_height = min(height, na.rm = T),
+                 m_height = mean(height, na.rm = T),
+                 max_height = max(height, na.rm = T))
+
+ds %&gt;% group_by(species) %&gt;%
+* summarize(min_height = min(height, na.rm = T),
+*                m_height = mean(height, na.rm = T),
+*                max_height = max(height, na.rm = T),
+*                n = n())
+```
+]
+ 
+.panel2-summarize-auto[
+
+```
+# A tibble: 1 × 1
+  min_height
+       &lt;int&gt;
+1         NA
+```
+
+```
+# A tibble: 1 × 1
+  min_height
+       &lt;int&gt;
+1         66
+```
+
+```
+# A tibble: 1 × 3
+  min_height m_height max_height
+       &lt;int&gt;    &lt;dbl&gt;      &lt;int&gt;
+1         66     174.        264
+```
+
+```
+# A tibble: 38 × 5
+   species   min_height m_height max_height     n
+   &lt;chr&gt;          &lt;int&gt;    &lt;dbl&gt;      &lt;int&gt; &lt;int&gt;
+ 1 Aleena            79      79          79     1
+ 2 Besalisk         198     198         198     1
+ 3 Cerean           198     198         198     1
+ 4 Chagrian         196     196         196     1
+ 5 Clawdite         168     168         168     1
+ 6 Droid             96     131.        200     6
+ 7 Dug              112     112         112     1
+ 8 Ewok              88      88          88     1
+ 9 Geonosian        183     183         183     1
+10 Gungan           196     209.        224     3
+# … with 28 more rows
+```
+]
+
+&lt;style&gt;
+.panel1-summarize-auto {
+  color: black;
+  width: 53.4545454545454%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-summarize-auto {
+  color: black;
+  width: 44.5454545454545%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-summarize-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
   padding-left: 1%;
   font-size: 80%
 }

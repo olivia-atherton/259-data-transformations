@@ -374,11 +374,13 @@ ds <- ds %>%
 ```
 
 ---
-`r chunk_reveal("mutate", break_type = "auto", float = "none", widths = c(3, 1), title = "# Mutate (add or modify columns)")`
+`r chunk_reveal("summarize", break_type = "auto", widths = c(1.2, 1), title = "# Summarize (calculate variables in aggregate)")`
 
-```{r mutate, include = FALSE}
-ds <- starwars %>% select(name, mass, height, species) #omit
+```{r summarize, include = FALSE}
+ds <- starwars %>% select(name, mass, height, species)
 ds %>% summarize(min_height = min(height))
+ds %>% summarize(min_height = min(height, na.rm = T))
+
 ds %>% summarize(min_height = min(height, na.rm = T),
                  m_height = mean(height, na.rm = T),
                  max_height = max(height, na.rm = T))
