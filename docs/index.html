@@ -1752,7 +1752,7 @@ count: false
 ```r
 library(tidyverse)  #loads dplyr
 ds &lt;- starwars  #loads built-in star wars database
-*arrange(ds, -height, mass)
+*arrange(ds, desc(height), mass)
 ```
 ]
  
@@ -2136,10 +2136,10 @@ count: false
 
 ```
 # A tibble: 2 × 14
-  name     height  mass hair_color skin_color eye_color birth_year sex    gender
-  &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; 
-1 Rey          NA    NA brown      light      hazel             NA female femin…
-2 Wedge A…    170    77 brown      fair       hazel             21 male   mascu…
+  name     height  mass hair_color skin_color eye_color birth_year sex   gender 
+  &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  
+1 San Hill    191    NA none       grey       gold              NA male  mascul…
+2 Wat Tam…    193    48 none       green, gr… unknown           NA male  mascul…
 # … with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -2160,10 +2160,10 @@ count: false
 
 ```
 # A tibble: 2 × 14
-  name      height  mass hair_color skin_color eye_color birth_year sex   gender
-  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Lama Su      229    88 none       grey       black             NA male  mascu…
-2 Bail Pre…    191    NA black      tan        brown             67 male  mascu…
+  name     height  mass hair_color skin_color eye_color birth_year sex   gender 
+  &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  
+1 Mace Wi…    188    84 none       dark       brown             72 male  mascul…
+2 Jango F…    183    79 black      tan        brown             66 male  mascul…
 # … with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -2946,7 +2946,7 @@ ds_sorted_filtered &lt;- filter(ds_sorted, height &lt; 70)
 ---
 count: false
  
-# Introducing pipes: %&gt;% 
+# Introducing the pipe operator: %&gt;% 
 .panel1-pipe-auto[
 
 ```r
@@ -2980,7 +2980,7 @@ ds
 ---
 count: false
  
-# Introducing pipes: %&gt;% 
+# Introducing the pipe operator: %&gt;% 
 .panel1-pipe-auto[
 
 ```r
@@ -3014,88 +3014,14 @@ ds
 ---
 count: false
  
-# Introducing pipes: %&gt;% 
+# Introducing the pipe operator: %&gt;% 
 .panel1-pipe-auto[
 
 ```r
 ds &lt;- starwars
 ds &lt;- ds %&gt;% select(name, height, eye_color)
-*ds &lt;- starwars
 
-ds
-```
-]
- 
-.panel2-pipe-auto[
-
-```
-# A tibble: 87 × 14
-   name    height  mass hair_color  skin_color eye_color birth_year sex   gender
-   &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
- 1 Luke S…    172    77 blond       fair       blue            19   male  mascu…
- 2 C-3PO      167    75 &lt;NA&gt;        gold       yellow         112   none  mascu…
- 3 R2-D2       96    32 &lt;NA&gt;        white, bl… red             33   none  mascu…
- 4 Darth …    202   136 none        white      yellow          41.9 male  mascu…
- 5 Leia O…    150    49 brown       light      brown           19   fema… femin…
- 6 Owen L…    178   120 brown, grey light      blue            52   male  mascu…
- 7 Beru W…    165    75 brown       light      blue            47   fema… femin…
- 8 R5-D4       97    32 &lt;NA&gt;        white, red red             NA   none  mascu…
- 9 Biggs …    183    84 black       light      brown           24   male  mascu…
-10 Obi-Wa…    182    77 auburn, wh… fair       blue-gray       57   male  mascu…
-# … with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
-#   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;
-```
-]
-
----
-count: false
- 
-# Introducing pipes: %&gt;% 
-.panel1-pipe-auto[
-
-```r
-ds &lt;- starwars
-ds &lt;- ds %&gt;% select(name, height, eye_color)
-ds &lt;- starwars
 *ds &lt;- ds
-
-ds
-```
-]
- 
-.panel2-pipe-auto[
-
-```
-# A tibble: 87 × 14
-   name    height  mass hair_color  skin_color eye_color birth_year sex   gender
-   &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
- 1 Luke S…    172    77 blond       fair       blue            19   male  mascu…
- 2 C-3PO      167    75 &lt;NA&gt;        gold       yellow         112   none  mascu…
- 3 R2-D2       96    32 &lt;NA&gt;        white, bl… red             33   none  mascu…
- 4 Darth …    202   136 none        white      yellow          41.9 male  mascu…
- 5 Leia O…    150    49 brown       light      brown           19   fema… femin…
- 6 Owen L…    178   120 brown, grey light      blue            52   male  mascu…
- 7 Beru W…    165    75 brown       light      blue            47   fema… femin…
- 8 R5-D4       97    32 &lt;NA&gt;        white, red red             NA   none  mascu…
- 9 Biggs …    183    84 black       light      brown           24   male  mascu…
-10 Obi-Wa…    182    77 auburn, wh… fair       blue-gray       57   male  mascu…
-# … with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
-#   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;
-```
-]
-
----
-count: false
- 
-# Introducing pipes: %&gt;% 
-.panel1-pipe-auto[
-
-```r
-ds &lt;- starwars
-ds &lt;- ds %&gt;% select(name, height, eye_color)
-ds &lt;- starwars
-ds &lt;- ds %&gt;%
-* select(name, height, eye_color)
 
 ds
 ```
@@ -3124,16 +3050,15 @@ ds
 ---
 count: false
  
-# Introducing pipes: %&gt;% 
+# Introducing the pipe operator: %&gt;% 
 .panel1-pipe-auto[
 
 ```r
 ds &lt;- starwars
 ds &lt;- ds %&gt;% select(name, height, eye_color)
-ds &lt;- starwars
+
 ds &lt;- ds %&gt;%
-  select(name, height, eye_color) %&gt;%
-* arrange(height, eye_color)
+* select(name, eye_color)
 
 ds
 ```
@@ -3142,19 +3067,19 @@ ds
 .panel2-pipe-auto[
 
 ```
-# A tibble: 87 × 3
-   name                  height eye_color
-   &lt;chr&gt;                  &lt;int&gt; &lt;chr&gt;    
- 1 Yoda                      66 brown    
- 2 Ratts Tyerell             79 unknown  
- 3 Wicket Systri Warrick     88 brown    
- 4 Dud Bolt                  94 yellow   
- 5 R2-D2                     96 red      
- 6 R4-P17                    96 red, blue
- 7 R5-D4                     97 red      
- 8 Sebulba                  112 orange   
- 9 Gasgano                  122 black    
-10 Watto                    137 yellow   
+# A tibble: 87 × 2
+   name               eye_color
+   &lt;chr&gt;              &lt;chr&gt;    
+ 1 Luke Skywalker     blue     
+ 2 C-3PO              yellow   
+ 3 R2-D2              red      
+ 4 Darth Vader        yellow   
+ 5 Leia Organa        brown    
+ 6 Owen Lars          blue     
+ 7 Beru Whitesun lars blue     
+ 8 R5-D4              red      
+ 9 Biggs Darklighter  brown    
+10 Obi-Wan Kenobi     blue-gray
 # … with 77 more rows
 ```
 ]
@@ -3162,17 +3087,16 @@ ds
 ---
 count: false
  
-# Introducing pipes: %&gt;% 
+# Introducing the pipe operator: %&gt;% 
 .panel1-pipe-auto[
 
 ```r
 ds &lt;- starwars
 ds &lt;- ds %&gt;% select(name, height, eye_color)
-ds &lt;- starwars
+
 ds &lt;- ds %&gt;%
-  select(name, height, eye_color) %&gt;%
-  arrange(height, eye_color) %&gt;%
-* filter(height &lt; 100)
+  select(name, eye_color) %&gt;%
+* arrange(eye_color)
 
 ds
 ```
@@ -3181,16 +3105,67 @@ ds
 .panel2-pipe-auto[
 
 ```
-# A tibble: 7 × 3
-  name                  height eye_color
-  &lt;chr&gt;                  &lt;int&gt; &lt;chr&gt;    
-1 Yoda                      66 brown    
-2 Ratts Tyerell             79 unknown  
-3 Wicket Systri Warrick     88 brown    
-4 Dud Bolt                  94 yellow   
-5 R2-D2                     96 red      
-6 R4-P17                    96 red, blue
-7 R5-D4                     97 red      
+# A tibble: 87 × 2
+   name       eye_color
+   &lt;chr&gt;      &lt;chr&gt;    
+ 1 Greedo     black    
+ 2 Nien Nunb  black    
+ 3 Gasgano    black    
+ 4 Kit Fisto  black    
+ 5 Plo Koon   black    
+ 6 Lama Su    black    
+ 7 Taun We    black    
+ 8 Shaak Ti   black    
+ 9 Tion Medon black    
+10 BB8        black    
+# … with 77 more rows
+```
+]
+
+---
+count: false
+ 
+# Introducing the pipe operator: %&gt;% 
+.panel1-pipe-auto[
+
+```r
+ds &lt;- starwars
+ds &lt;- ds %&gt;% select(name, height, eye_color)
+
+ds &lt;- ds %&gt;%
+  select(name, eye_color) %&gt;%
+  arrange(eye_color) %&gt;%
+* filter(eye_color == "blue")
+
+ds
+```
+]
+ 
+.panel2-pipe-auto[
+
+```
+# A tibble: 19 × 2
+   name               eye_color
+   &lt;chr&gt;              &lt;chr&gt;    
+ 1 Luke Skywalker     blue     
+ 2 Owen Lars          blue     
+ 3 Beru Whitesun lars blue     
+ 4 Anakin Skywalker   blue     
+ 5 Wilhuff Tarkin     blue     
+ 6 Chewbacca          blue     
+ 7 Jek Tono Porkins   blue     
+ 8 Lobot              blue     
+ 9 Mon Mothma         blue     
+10 Qui-Gon Jinn       blue     
+11 Finis Valorum      blue     
+12 Ric Olié           blue     
+13 Adi Gallia         blue     
+14 Mas Amedda         blue     
+15 Cliegg Lars        blue     
+16 Luminara Unduli    blue     
+17 Barriss Offee      blue     
+18 Jocasta Nu         blue     
+19 Tarfful            blue     
 ```
 ]
 
@@ -3224,6 +3199,22 @@ ds
 
 
 
+
+---
+# `ds &lt;- ds %&gt;%` is not the most intuitive
+
+- There are options, but I stick with it as it's the most common to see
+
+
+```r
+ds &lt;- ds %&gt;% select(height) %&gt;% slice_sample(n = 5)
+
+ds %&gt;% select(height) %&gt;% slice_sample(n = 5) -&gt; ds
+
+ds &lt;- select(ds, height) %&gt;% slice_sample(n = 5)
+
+ds &lt;- slice_sample(select(ds, height), n = 5)
+```
 
 &lt;!-- adjust font size and other formatting defs in this css code chunk --&gt;
 &lt;style type="text/css"&gt;

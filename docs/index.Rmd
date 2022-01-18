@@ -226,7 +226,7 @@ ds <- starwars #loads built-in star wars database
 glimpse(ds) #ROTATE
 arrange(ds, name) #ROTATE
 arrange(ds, height) #ROTATE
-arrange(ds, -height, mass) #ROTATE
+arrange(ds, desc(height), mass) #ROTATE
 arrange(ds, eye_color, hair_color) #ROTATE
 ```
 
@@ -299,7 +299,7 @@ ds_sorted_filtered
 ```
 
 ---
-`r chunk_reveal("pipe", break_type = "auto", float = "none", left_assign = T, widths = c(5, 1), title = "# Introducing the "pipe" operator: %>% ")`
+`r chunk_reveal("pipe", break_type = "auto", float = "none", left_assign = T, widths = c(5, 1), title = "# Introducing the pipe operator: %>% ")`
 
 ```{r pipe, include = FALSE}
 ds <- starwars
@@ -307,8 +307,37 @@ ds <- ds %>% select(name, height, eye_color)
 
 ds <- ds %>% 
   select(name, eye_color) %>% 
-  arrange(height, eye_color) %>% 
+  arrange(eye_color) %>% 
   filter(eye_color == "blue")
+```
+
+---
+# This is not the most intuitive thing at first
+
+All the options below are equivalent, but I stick with `ds <- ds %>%` because it's the most common to see
+
+```{r, eval = F}
+ds <- ds %>% select(height) %>% slice_tail(n = 5)
+
+ds %>% select(height) %>% slice_tail(n = 5) -> ds
+
+ds <- select(ds, height) %>% slice_tail(n = 5)
+
+ds <- slice_tail(select(ds, height), n = 5)
+```
+
+---
+`r chunk_reveal("mutate", break_type = "auto", float = "none", left_assign = T, widths = c(5, 1), title = "# Mutate (add or modify columns)")`
+
+```{r mutate, include = FALSE}
+ds <- starwars %>% select(name, mass, height, hair_color)
+ds <- ds %>% mutate(in_movie = "yes")
+ds <- ds %>% mutate(height_m = height/100,
+                    bmi = mass/(height_m^2)) %>% 
+            arrange(desc(bmi))
+
+ds <- ds %>% filter(hair_color %in% c("blond", NA))
+
 ```
 
 <!-- adjust font size and other formatting defs in this css code chunk -->
