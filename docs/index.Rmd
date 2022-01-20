@@ -67,7 +67,7 @@ library(icons) #https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free
 <br />
  
 .content-box-blue[
-`r icons::fontawesome("github")` Follow along from the [Github repo](https://github.com/psych-259-data-science-2022/259-langbasics-importing)
+`r icons::fontawesome("github")` Follow along from the [Github repo](https://github.com/psych-259-data-science-2022/259-data-transformations)
 ]
 
 .footnote[.small[.bold[Last updated: `r Sys.Date()`]]]
@@ -187,6 +187,8 @@ x != 2
 x <- c(-1, 0, 1)
 x < 0
 x == 0
+
+# Quickly test is a value is contained in a set
 1 %in% x
 ```
 
@@ -225,7 +227,7 @@ ifelse(NA %in% x, "x contains a missing value", "x does not contain a missing va
 
 - In base R, you often need to specify the dataset over and over to access the columns: `ds[ds$col1 == 1, 0]`
 
-- In dplyr functions, the data argument lets you work with column names without ever using `$`. The data argument also lets you access the columns directly without using quoted expressions
+- In dplyr functions, the data argument lets you work with column names without ever using `$`. The data argument also lets you access the columns directly without using quoted expressions: `filter(data, col1 == 1)`
 
 - Most dplyr functions return the entire tibble back as an output
 
@@ -282,9 +284,6 @@ select(ds, where(is.character)) #ROTATE
 ```
 
 ---
-# Comparison to base R
-
----
 `r chunk_reveal("noassignment", break_type = "auto", widths = c(1, 1), title = "# What's going on here?")`
 
 ```{r noassignment, include = FALSE}
@@ -311,8 +310,6 @@ ds_name_height_eye_color <- select(ds, name, height, eye_color)
 ds_sorted <- arrange(ds_name_height_eye_color, height, eye_color)
 ds_sorted_filtered <- filter(ds_sorted, height < 70)
 ds_sorted_filtered
-
-ls()
 ```
 
 ---
@@ -365,7 +362,7 @@ library(janitor)
 iris #ROTATE
 iris %>% rename(sepal_length = Sepal.Length) #ROTATE
 iris %>% rename(sepal_length = Sepal.Length, sepal_width = Sepal.Width, petal_length = Petal.Length, petal_width = Petal.Width, species = Species) #ROTATE
-iris %>% rename_with(tolower) #ROTATE
+iris %>% rename_with(toupper) #ROTATE
 iris %>% rename_with(tolower, starts_with("Petal")) #ROTATE
 iris %>% clean_names() #ROTATE
 iris %>% clean_names("small_camel") #ROTATE
